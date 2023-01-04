@@ -1,59 +1,102 @@
-## Image search
+# React homework template
 
-Write an application to search for images by keyword. Create Components
-<Searchbar>, <ImageGallery>, <ImageGalleryItem>, <Loader>, <Button> and <Modal>.
+Этот проект был создан при помощи
+[Create React App](https://github.com/facebook/create-react-app). Для знакомства
+и настройки дополнительных возможностей
+[обратись к документации](https://facebook.github.io/create-react-app/docs/getting-started).
 
-## Pixabay API statement
+## Создание репозитория по шаблону
 
-For HTTP requests, use the public image search service
-[Pixabay](https://pixabay.com/api/docs/). Register and get private access key.
+Используй этот репозиторий организации GoIT как шаблон для создания репозитория
+своего проекта. Для этого нажми на кнопку `«Use this template»` и выбери опцию
+`«Create a new repository»`, как показано на изображении.
 
-The URL string of the HTTP request.
+![Creating repo from a template step 1](./assets/template-step-1.png)
 
-```bash
-https://pixabay.com/api/?q=cat&page=1&key=your_key&image_type=photo&orientation=horizontal&per_page=12
+На следующем шаге откроется страница создания нового репозитория. Заполни поле
+его имени, убедись что репозиторий публичный, после чего нажми кнопку
+`«Create repository from template»`.
+
+![Creating repo from a template step 2](./assets/template-step-2.png)
+
+Теперь у тебя есть личный репозиторий проекта, со структурой файлов и папок
+репозитория-шаблона. Далее работай с ним как с любым другим личным репозиторием,
+клонируй его себе на компьютер, пиши код, делай коммиты и отправляй их на
+GitHub.
+
+## Подготовка к работе
+
+1. Убедись что на компьютере установлена LTS-версия Node.js.
+   [Скачай и установи](https://nodejs.org/en/) её если необходимо.
+2. Установи базовые зависимости проекта командой `npm install`.
+3. Запусти режим разработки, выполнив команду `npm start`.
+4. Перейди в браузере по адресу [http://localhost:3000](http://localhost:3000).
+   Эта страница будет автоматически перезагружаться после сохранения изменений в
+   файлах проекта.
+
+## Деплой
+
+Продакшн версия проекта будет автоматически проходить линтинг, собираться и
+деплоиться на GitHub Pages, в ветку `gh-pages`, каждый раз когда обновляется
+ветка `main`. Например, после прямого пуша или принятого пул-реквеста. Для этого
+необходимо в файле `package.json` отредактировать поле `homepage`, заменив
+`your_username` и `your_repo_name` на свои, и отправить изменения на GitHub.
+
+```json
+"homepage": "https://your_username.github.io/your_repo_name/"
 ```
 
-The Pixabay API supports pagination, the default `page` parameter is `1`. Let 12
-objects come in the response, set in the `per_page` parameter. Not forget that
-when searching for a new keyword, you need to reset the value `page` to `1`.
+Далее необходимо зайти в настройки GitHub-репозитория (`Settings` > `Pages`) и
+выставить раздачу продакшн версии файлов из папки `/root` ветки `gh-pages`, если
+это небыло сделано автоматически.
 
-In response from api comes an array of objects in which you are only interested
-in the following properties.
+![GitHub Pages settings](./assets/repo-settings.png)
 
-- `id` - unique identifier
-- `webformatURL` - link to a small image for the list of cards
-- `largeImageURL` - link to a large image for the modal window
+### Статус деплоя
 
-## Description of the `<Searchbar>` component
+Статус деплоя крайнего коммита отображается иконкой возле его идентификатора.
 
-The component accepts one prop `onSubmit` - a function to pass the value of the
-input when submitting the form.
+- **Желтый цвет** - выполняется сборка и деплой проекта.
+- **Зеленый цвет** - деплой завершился успешно.
+- **Красный цвет** - во время линтинга, сборки или деплоя произошла ошибка.
 
-## Description of the `<ImageGallery>` component
+Более детальную информацию о статусе можно посмотреть кликнув по иконке, и в
+выпадающем окне перейти по ссылке `Details`.
 
-List of image cards.
+![Deployment status](./assets/deploy-status.png)
 
-## Description of the `<ImageGalleryItem>` component
+### Живая страница
 
-A component of a list item with an image.
+Через какое-то время, обычно пару минут, живую страницу можно будет посмотреть
+по адресу указанному в отредактированном свойстве `homepage`. Например, вот
+ссылка на живую версию для этого репозитория
+[https://goitacademy.github.io/react-homework-template](https://goitacademy.github.io/react-homework-template).
 
-## Description of the `<Button>` component
+Если открывается пустая страница, убедись что во вкладке `Console` нет ошибок
+связанных с неправильными путями к CSS и JS файлам проекта (**404**). Скорее
+всего у тебя неправильное значение свойства `homepage` в файле `package.json`.
 
-When you click on the `Load more` button, the next portion should be loaded
-images and render along with the previous ones. The button should only render
-when there are some loaded images. If the array of images is empty, the button
-is not rendered.
+### Маршрутизация
 
-## Description of the `<Loader>` component
+Если приложение использует библиотеку `react-router-dom` для маршрутизации,
+необходимо дополнительно настроить компонент `<BrowserRouter>`, передав в пропе
+`basename` точное название твоего репозитория. Слеш в начале строки
+обязателен.
 
-The spinner component is displayed while the images are loading. Use any
-finished component, for example
-[react-loader-spinner](https://github.com/mhnpd/react-loader-spinner) or
-whatever another.
+```jsx
+<BrowserRouter basename="/your_repo_name">
+  <App />
+</BrowserRouter>
+```
 
-## Description of the `<Modal>` component
+## Как это работает
 
-Clicking on a gallery item should open a modal window with a dark overlay and
-display a larger version of the image. The modal should close by pressing the
-`ESC` key or by clicking on the overlay.
+![How it works](./assets/how-it-works.png)
+
+1. После каждого пуша в ветку `main` GitHub-репозитория, запускается специальный
+   скрипт (GitHub Action) из файла `.github/workflows/deploy.yml`.
+2. Все файлы репозитория копируются на сервер, где проект инициализируется и
+   проходит линтинг и сборку перед деплоем.
+3. Если все шаги прошли успешно, собранная продакшн версия файлов проекта
+   отправляется в ветку `gh-pages`. В противном случае, в логе выполнения
+   скрипта будет указано в чем проблема.
